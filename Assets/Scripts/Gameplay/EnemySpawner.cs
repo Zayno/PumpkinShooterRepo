@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public enum SpawnNumber {none, First, Second, third};
+
     [SerializeField] private Transform _spawnPoint = null;
 
     [SerializeField] private Enemy _enemyPrefab = null;
+
+    [SerializeField] private SpawnNumber MyNumber = SpawnNumber.none;
 
     private Enemy _lastSpawned = null;
 
@@ -17,8 +21,9 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemy();
     }
 
-    void SpawnEnemy()
+    public void SpawnEnemy()
     {
         _lastSpawned = Instantiate( _enemyPrefab, _spawnPoint.position, _spawnPoint.rotation );
+        _lastSpawned.MySpawnNumber = MyNumber;
     }
 }

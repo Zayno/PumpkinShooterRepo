@@ -13,8 +13,10 @@ public class Enemy : MonoBehaviour
 
     [Header("Physics")]
     [SerializeField] private Rigidbody _rigidBody = null;
+    public EnemySpawner.SpawnNumber MySpawnNumber = EnemySpawner.SpawnNumber.none;
 
     private Vector3 _startPosition = Vector3.zero;
+    bool IsHit = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,22 +26,32 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float positionOffset = Mathf.Sin( Time.timeSinceLevelLoad / _verticalFrequency ) * _verticalAmplitude;
-        transform.position = new Vector3( _startPosition.x, _startPosition.y + positionOffset, _startPosition.z );
+        if(IsHit == false)
+        {
+            float positionOffset = Mathf.Sin(Time.timeSinceLevelLoad / _verticalFrequency) * _verticalAmplitude;
+            transform.position = new Vector3(_startPosition.x, _startPosition.y + positionOffset, _startPosition.z);
+        }
     }
 
-    void Die()
+    void SetupDeathPhysics()
     {
+        _rigidBody.isKinematic = false;
         _rigidBody.useGravity = true;
-        Destroy(this);
     }
 
     void OnCollisionEnter( Collision collision )
     {
-        if( collision.gameObject.GetComponent<Cannonball>() )
+        if(IsHit == false)
         {
-            _rigidBody.AddForceAtPosition(collision.transform.forward, collision.GetContact(0).point, ForceMode.Impulse);
-            Die();
+            if (collision.gameObject.GetComponent<Cannonball>())
+            {
+                IsHit = true;
+                SetupDeathPhysics();
+                _rigidBody.AddForceAtPosition(collision.transform.forward, collision.GetContact(0).point, ForceMode.Impulse);
+                Destroy(this.gameObject, 4);
+                MainGameManager.Instance.OnPumpkinHit(MySpawnNumber);
+            }
         }
+
     }
 }
