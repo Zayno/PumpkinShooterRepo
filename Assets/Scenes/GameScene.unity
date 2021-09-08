@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272a19c83ec3844688230421fc5745de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 60
+  timeLeft: 999
 --- !u!4 &856407945
 Transform:
   m_ObjectHideFlags: 0
@@ -1725,6 +1725,7 @@ MonoBehaviour:
   Spawner_1: {fileID: 1542465723}
   Spawner_2: {fileID: 23718056}
   Spawner_3: {fileID: 1558278651}
+  DelayBeforeRespawning: 3
 --- !u!4 &1355453280
 Transform:
   m_ObjectHideFlags: 0

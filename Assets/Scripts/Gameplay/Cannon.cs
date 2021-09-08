@@ -39,7 +39,35 @@ public class Cannon : MonoBehaviour
         {
             _cannonTransform.Rotate( 0.0f, Time.deltaTime * _rotationRate, 0.0f, Space.World );
         }
+
+        //if (Input.GetKey(KeyCode.Keypad1))
+        //{
+        //    StartCoroutine(LerpTowards());
+        //}
     }
+
+    //IEnumerator LerpTowards()
+    //{
+    //    float TargetY = 360 - _cannonTransform.rotation.eulerAngles.y - 90;
+
+    //    if(TargetY < _cannonTransform.rotation.eulerAngles.y)
+    //    {
+    //        while (TargetY < _cannonTransform.rotation.eulerAngles.y)
+    //        {
+    //            _cannonTransform.Rotate(0.0f, -(Time.deltaTime * _rotationRate), 0.0f, Space.World);
+    //            yield return null;
+
+    //        }
+
+    //    }
+    //    else
+    //    {
+
+    //    }
+
+
+    //    yield return null;
+    //}
 
     public void FireCannon()
     {
