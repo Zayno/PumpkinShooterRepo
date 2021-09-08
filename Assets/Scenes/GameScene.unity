@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43667546, g: 0.48427135, b: 0.5645225, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -961,6 +961,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2295842770789856697, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: Spawner_1
+      value: 
+      objectReference: {fileID: 1314005066}
+    - target: {fileID: 2295842770789856697, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: Spawner_2
+      value: 
+      objectReference: {fileID: 929782592}
+    - target: {fileID: 2295842770789856697, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: Spawner_3
+      value: 
+      objectReference: {fileID: 1760476820}
+    - target: {fileID: 2295842770789856697, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: AutoAimSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295842770789856697, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: AutoAimDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901281729418985123, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901281729418985123, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7901281729418985123, guid: a658eab1da5d5ae428cff76f5b088d4b,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -980,6 +1015,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7901281729418985123, guid: a658eab1da5d5ae428cff76f5b088d4b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7901281729418985123, guid: a658eab1da5d5ae428cff76f5b088d4b,
         type: 3}
@@ -1175,7 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272a19c83ec3844688230421fc5745de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 999
+  timeLeft: 5
 --- !u!4 &856407945
 Transform:
   m_ObjectHideFlags: 0
@@ -1725,6 +1765,11 @@ MonoBehaviour:
   Spawner_1: {fileID: 1542465723}
   Spawner_2: {fileID: 23718056}
   Spawner_3: {fileID: 1558278651}
+  EnemyPrefabList:
+  - {fileID: 99802632, guid: f5d2c3ef0418d4a1fa17390f6ac3cf5a, type: 3}
+  - {fileID: 1085797306, guid: 984d57a7ce16f4767bf64315ca562f4f, type: 3}
+  - {fileID: 1680219031, guid: de25333919b8f4054934f0e6b217ff1d, type: 3}
+  - {fileID: 1641588500, guid: ae2936282725e4db5b9529b3a677dbb3, type: 3}
   DelayBeforeRespawning: 3
 --- !u!4 &1355453280
 Transform:

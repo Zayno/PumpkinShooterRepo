@@ -10,6 +10,7 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private EnemySpawner Spawner_1;
     [SerializeField] private EnemySpawner Spawner_2;
     [SerializeField] private EnemySpawner Spawner_3;
+    [SerializeField] private List<Enemy> EnemyPrefabList;
 
     [Tooltip("How long to wait after a hit to respawn a pumpkin?")]
     [SerializeField] private float DelayBeforeRespawning = 3.0f;
@@ -30,13 +31,15 @@ public class MainGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if(SaveDataController.Instance)
+        {
+            //TODO: add validation to make sure prefabs exist and the json is valid
+            Spawner_1.SetEnemyPrefab(EnemyPrefabList[SaveDataController.Instance.MyData.Pumpkin_1 - 1]);
+            Spawner_2.SetEnemyPrefab(EnemyPrefabList[SaveDataController.Instance.MyData.Pumpkin_2 - 1]);
+            Spawner_3.SetEnemyPrefab(EnemyPrefabList[SaveDataController.Instance.MyData.Pumpkin_3 - 1]);
+        }
     }
 
-    public void DelayedRespawn(EnemySpawner.SpawnNumber num)
-    {
-
-    }
 
     IEnumerator DelayedRespawn(EnemySpawner.SpawnNumber num, float delay)
     {
