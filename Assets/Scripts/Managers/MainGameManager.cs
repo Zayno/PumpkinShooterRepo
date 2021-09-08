@@ -17,7 +17,6 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private float DelayBeforeRespawning = 3.0f;
     public int SessionScore = 0;
 
-
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -45,7 +44,6 @@ public class MainGameManager : MonoBehaviour
         SessionScore = 0;
 
     }
-
 
     IEnumerator DelayedRespawn(EnemySpawner.SpawnNumber num, float delay)
     {
@@ -80,6 +78,4 @@ public class MainGameManager : MonoBehaviour
             AppLifeSaveData.HighScore = SessionScore;
         }
     }
-
-
 }
