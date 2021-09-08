@@ -11,9 +11,11 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private EnemySpawner Spawner_2;
     [SerializeField] private EnemySpawner Spawner_3;
     [SerializeField] private List<Enemy> EnemyPrefabList;
+    [SerializeField] private GameSession _gameSession = null;
 
     [Tooltip("How long to wait after a hit to respawn a pumpkin?")]
     [SerializeField] private float DelayBeforeRespawning = 3.0f;
+    public int SessionScore = 0;
 
 
     void Awake()
@@ -38,6 +40,10 @@ public class MainGameManager : MonoBehaviour
             Spawner_2.SetEnemyPrefab(EnemyPrefabList[SaveDataController.Instance.MyData.Pumpkin_2 - 1]);
             Spawner_3.SetEnemyPrefab(EnemyPrefabList[SaveDataController.Instance.MyData.Pumpkin_3 - 1]);
         }
+
+        _gameSession.OnSessionEnd += HandleSessionEnded;
+        SessionScore = 0;
+
     }
 
 
@@ -62,12 +68,18 @@ public class MainGameManager : MonoBehaviour
     public void OnPumpkinHit(EnemySpawner.SpawnNumber num)
     {
         StartCoroutine(DelayedRespawn(num, DelayBeforeRespawning));
-        AppLifeSaveData.CurrentScore++;
+        SessionScore++;
     }
 
-    // Update is called once per frame
-    void Update()
+    void HandleSessionEnded()
     {
+        _gameSession.OnSessionEnd -= HandleSessionEnded;
 
+        if(SessionScore > AppLifeSaveData.HighScore)
+        {
+            AppLifeSaveData.HighScore = SessionScore;
+        }
     }
+
+
 }

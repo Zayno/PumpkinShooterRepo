@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour {
@@ -31,10 +32,20 @@ public class HUD : MonoBehaviour {
         _gameOverScreen.SetActive(true);
     }
 
+    public void OnGoToMainMenuButtonPressed()
+    {
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void OnPlayAgainButtonPressed()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
     // Update is called once per frame
     void Update()
     {
         _timeRemainingValue.text = GetFormattedTimeFromSeconds(_gameSession.timeLeft);
-        _scoreValue.text = AppLifeSaveData.CurrentScore.ToString();
+        _scoreValue.text = MainGameManager.Instance.SessionScore.ToString();
     }
 }

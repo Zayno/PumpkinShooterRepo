@@ -21,6 +21,7 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        timeLeft = SaveDataController.Instance.MyData.Game_Length_Seconds;
         StartSession();
     }
 
