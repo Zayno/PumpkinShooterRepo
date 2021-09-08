@@ -9,9 +9,13 @@ public class Cannonball : MonoBehaviour
     {
         
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Cannon ball collision");
+    }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
         
     }
