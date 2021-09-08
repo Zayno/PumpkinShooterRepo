@@ -35,5 +35,6 @@ public class HUD : MonoBehaviour {
     void Update()
     {
         _timeRemainingValue.text = GetFormattedTimeFromSeconds(_gameSession.timeLeft);
+        _scoreValue.text = AppLifeSaveData.CurrentScore.ToString();
     }
 }

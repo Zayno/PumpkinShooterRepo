@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     {
         if(IsHit == false)
         {
-            if (collision.gameObject.GetComponent<Cannonball>())
+            if (collision.gameObject.CompareTag("CannonBall"))
             {
                 IsHit = true;
                 SetupDeathPhysics();

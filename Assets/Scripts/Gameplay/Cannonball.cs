@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class Cannonball : MonoBehaviour
 {
+    [SerializeField] private float DestructionDelayTime = 3;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Destroy(this.gameObject, DestructionDelayTime);
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Cannon ball collision");
-    }
-
-        // Update is called once per frame
-        void Update()
-    {
-        
     }
 }

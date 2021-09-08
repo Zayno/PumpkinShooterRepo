@@ -11,6 +11,9 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private EnemySpawner Spawner_2;
     [SerializeField] private EnemySpawner Spawner_3;
 
+    [Tooltip("How long to wait after a hit to respawn a pumpkin?")]
+    [SerializeField] private float DelayBeforeRespawning = 3.0f;
+
 
     void Awake()
     {
@@ -55,7 +58,8 @@ public class MainGameManager : MonoBehaviour
 
     public void OnPumpkinHit(EnemySpawner.SpawnNumber num)
     {
-        StartCoroutine(DelayedRespawn(num, 3));
+        StartCoroutine(DelayedRespawn(num, DelayBeforeRespawning));
+        AppLifeSaveData.CurrentScore++;
     }
 
     // Update is called once per frame
