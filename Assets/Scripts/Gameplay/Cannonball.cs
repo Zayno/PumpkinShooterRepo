@@ -11,7 +11,4 @@ public class Cannonball : MonoBehaviour
     {
         Destroy(this.gameObject, DestructionDelayTime);
     }
-    void OnCollisionEnter(Collision collision)
-    {
-    }
 }

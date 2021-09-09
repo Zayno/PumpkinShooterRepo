@@ -15,7 +15,8 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Transform Spawner_1;
     [SerializeField] private Transform Spawner_2;
     [SerializeField] private Transform Spawner_3;
-    [SerializeField] private float AutoAimDuration = 0.5f;
+    [SerializeField] private float AimSpeed = 10;//how many degrees persecond
+
 
     private float _timeOfLastFire = 0.0f;
     
@@ -51,22 +52,22 @@ public class Cannon : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            StartCoroutine(AutoAim(Spawner_1));
+            StartCoroutine(AutoAim2(Spawner_1));
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
-            StartCoroutine(AutoAim(Spawner_2));
+            StartCoroutine(AutoAim2(Spawner_2));
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            StartCoroutine(AutoAim(Spawner_3));
+            StartCoroutine(AutoAim2(Spawner_3));
         }
     }
 
 
-    IEnumerator AutoAim(Transform SpawnerTarget)
+    IEnumerator AutoAim2(Transform SpawnerTarget)
     {
         //prepare data to do math for aiming
         Vector3 SpawnerPosGrounded = SpawnerTarget.position;
@@ -79,42 +80,53 @@ public class Cannon : MonoBehaviour
         FlatForward.y = 0;
         FlatForward.Normalize();
         float AngleToTravel = Vector3.SignedAngle(FlatForward, targetDir, Vector3.up);
-
-        if(Mathf.Abs( AngleToTravel) < 1)
+        if (Mathf.Abs(AngleToTravel) < 1)
         {
             //already aimed at target
             yield break;
         }
 
         float StartY = _cannonTransform.rotation.eulerAngles.y;
-        float EndY = _cannonTransform.rotation.eulerAngles.y + AngleToTravel;
-        float startTime = Time.time;
 
-
+        float FrameAngleTrack = 0;
+        float EntireAngleTrack = 0;
         while (true)
         {
-            if (Time.time > startTime + AutoAimDuration)
+            Vector3 CurrentRot = _cannonTransform.rotation.eulerAngles;
+            if(AngleToTravel > 0)
             {
-                //before exit snap aim at target to avoid float percision issues
-                Vector3 FinalRotToSet = _cannonTransform.rotation.eulerAngles;
-                FinalRotToSet.y = EndY;
-                _cannonTransform.eulerAngles = FinalRotToSet;
+                FrameAngleTrack += AimSpeed * Time.deltaTime;
+                EntireAngleTrack += FrameAngleTrack;
 
-                yield break;
+                if (EntireAngleTrack > AngleToTravel)
+                {
+                    CurrentRot.y = AngleToTravel + StartY;
+                    _cannonTransform.eulerAngles = CurrentRot;
+                    yield break;
+
+                }
+            }
+            else
+            {
+                FrameAngleTrack -= AimSpeed * Time.deltaTime;
+                EntireAngleTrack += FrameAngleTrack;
+
+                if(EntireAngleTrack < AngleToTravel)
+                {
+                    CurrentRot.y = AngleToTravel + StartY;
+                    _cannonTransform.eulerAngles = CurrentRot;
+                    yield break;
+
+                }
             }
 
-            //this aims cannon at target over the specified duration 
-            //the aiming speed will be constant
-            float PercentageTime = (Time.time - startTime) / AutoAimDuration;
-            PercentageTime = Mathf.Clamp01(PercentageTime);
-            Vector3 CurrentRot = _cannonTransform.rotation.eulerAngles;
-            float newY = Mathf.LerpAngle(StartY, EndY, PercentageTime);
-            CurrentRot.y = newY;
+            CurrentRot.y += FrameAngleTrack;
             _cannonTransform.eulerAngles = CurrentRot;
+            FrameAngleTrack = 0;
+
             yield return null;
         }
     }
-
 
     public void FireCannon()
     {
