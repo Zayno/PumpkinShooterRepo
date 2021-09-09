@@ -18,12 +18,24 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
+        //SpawnEnemy();
     }
 
     public void SpawnEnemy()
     {
         _lastSpawned = Instantiate( _enemyPrefab, _spawnPoint.position, _spawnPoint.rotation );
         _lastSpawned.MySpawnNumber = MyNumber;
+    }
+
+    public void SetEnemyPrefab(Enemy NewEnemy)
+    {
+        if(_lastSpawned)
+        {
+            Destroy(_lastSpawned);
+        }
+
+        _enemyPrefab = NewEnemy;
+
+        SpawnEnemy();
     }
 }

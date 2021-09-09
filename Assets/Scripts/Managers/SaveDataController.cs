@@ -29,14 +29,10 @@ public class SaveDataController : MonoBehaviour
         {
             MyData = JsonUtility.FromJson<SavedData>(SaveSystem.Load());
         }
-
     }
 
     private void Start()
     {
         SceneManager.LoadScene("StartMenu");
     }
-
-
-
 }
